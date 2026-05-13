@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha Vitrine de Artes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <a href="/" class="logo">Minha Arte</a>
+
+        <nav class="nav">
+            <a href="/">Início</a>
+            <a href="/catalogo">Catálogo</a>
+            <a href="/sobre">Sobre</a>
+            <a href="{{ instagram_url }}" target="_blank">Instagram</a>
+        </nav>
+    </header>
+
+    <main>
+        {% if erro_404 %}
+            <section class="section center">
+                <h1>Página não encontrada</h1>
+                <p>O produto ou página que você tentou acessar não existe.</p>
+                <a href="/catalogo" class="btn primary">Voltar ao catálogo</a>
+            </section>
+        {% else %}
+            {% block content %}{% endblock %}
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <p>Este site funciona como uma vitrine. Compras, pagamento e envio são combinados diretamente pelo WhatsApp ou Instagram.</p>
+        <p>&copy; 2026 Minha Arte. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

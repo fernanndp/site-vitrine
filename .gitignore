@@ -1,0 +1,57 @@
+# Ambiente virtual
+.venv/
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Flask
+instance/
+.webassets-cache
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Banco local, caso use algum no futuro
+*.sqlite3
+*.db
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# PyCharm
+.idea/
+
+# Testes / cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build / dist
+build/
+dist/
+*.egg-info/
+
+# Railway / deploy local cache
+.railway/
+
+# Arquivos temporários
+*.tmp
+*.bak
+*.swp

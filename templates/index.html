@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="tag">Artes autorais</span>
+
+        <h1>Prints e camisetas com identidade própria.</h1>
+
+        <p>
+            Uma vitrine para conhecer minhas artes, ver produtos disponíveis
+            e entrar em contato diretamente para comprar ou tirar dúvidas.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/catalogo" class="btn primary">Ver catálogo</a>
+            <a href="{{ instagram_url }}" target="_blank" class="btn secondary">Ver Instagram</a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h2>Produtos em destaque</h2>
+        <p>Algumas peças disponíveis no momento.</p>
+    </div>
+
+    <div class="grid">
+        {% for produto in produtos_destaque %}
+            <article class="card">
+                <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.nome }}">
+
+                <div class="card-body">
+                    <span class="category">{{ produto.categoria }}</span>
+                    <h3>{{ produto.nome }}</h3>
+                    <p>{{ produto.descricao }}</p>
+
+                    <div class="card-footer">
+                        <strong>{{ produto.preco }}</strong>
+                        <a href="/produto/{{ produto.slug }}" class="btn small">Ver detalhes</a>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section info-box">
+    <h2>Como funciona a compra?</h2>
+
+    <p>
+        O site é apenas uma vitrine. Ao se interessar por algum produto,
+        você clica no botão de contato e conversa comigo pelo WhatsApp ou Instagram.
+        Por lá combinamos disponibilidade, pagamento, envio e detalhes do pedido.
+    </p>
+</section>
+
+{% endblock %}

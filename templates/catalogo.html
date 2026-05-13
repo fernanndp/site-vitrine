@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section">
+    <div class="section-header">
+        <h1>Catálogo</h1>
+        <p>Confira as artes disponíveis em prints e camisetas.</p>
+    </div>
+
+    <div class="grid">
+        {% for produto in produtos %}
+            <article class="card">
+                <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.nome }}">
+
+                <div class="card-body">
+                    <div class="card-top">
+                        <span class="category">{{ produto.categoria }}</span>
+                        <span class="status">{{ produto.status }}</span>
+                    </div>
+
+                    <h3>{{ produto.nome }}</h3>
+
+                    <p>{{ produto.descricao }}</p>
+
+                    <div class="card-footer">
+                        <strong>{{ produto.preco }}</strong>
+                        <a href="/produto/{{ produto.slug }}" class="btn small">Ver detalhes</a>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
