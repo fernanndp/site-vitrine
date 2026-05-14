@@ -1,43 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ nome_site }}{% endblock %}</title>
 
-    <title>Minha Vitrine de Artes</title>
+  <!-- Bootstrap 5 via CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Fontes criativas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chewy&family=Patrick+Hand&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS próprio -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
+
 <body>
+  <div class="hearts-background"></div>
 
-    <header class="header">
-        <a href="/" class="logo">Minha Arte</a>
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container">
+      <a class="navbar-brand logo-text" href="/">
+        {{ nome_site }}
+      </a>
 
-        <nav class="nav">
-            <a href="/">Início</a>
-            <a href="/catalogo">Catálogo</a>
-            <a href="/sobre">Sobre</a>
-            <a href="{{ instagram_url }}" target="_blank">Instagram</a>
-        </nav>
-    </header>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menuPrincipal"
+        aria-controls="menuPrincipal"
+        aria-expanded="false"
+        aria-label="Abrir menu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <main>
-        {% if erro_404 %}
-            <section class="section center">
-                <h1>Página não encontrada</h1>
-                <p>O produto ou página que você tentou acessar não existe.</p>
-                <a href="/catalogo" class="btn primary">Voltar ao catálogo</a>
-            </section>
-        {% else %}
-            {% block content %}{% endblock %}
-        {% endif %}
-    </main>
+      <div class="collapse navbar-collapse" id="menuPrincipal">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="/">Início</a>
+          </li>
 
-    <footer class="footer">
-        <p>Este site funciona como uma vitrine. Compras, pagamento e envio são combinados diretamente pelo WhatsApp ou Instagram.</p>
-        <p>&copy; 2026 Minha Arte. Todos os direitos reservados.</p>
-    </footer>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="/catalogo">Catálogo</a>
+          </li>
 
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="/sobre">Sobre</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="{{ instagram_url }}" target="_blank">
+              Instagram
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer-custom">
+    <div class="container text-center py-4">
+      <p class="mb-1">{{ nome_site }}</p>
+      <small>prints físicos • colagens • artes exclusivas</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

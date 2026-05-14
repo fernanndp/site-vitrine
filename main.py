@@ -1,16 +1,30 @@
 import os
 from urllib.parse import quote
 
-from Flask import Flask, render_template, abort
+from dotenv import load_dotenv
+from flask import Flask, render_template, abort
 
 from produtos import produtos
 
 
+load_dotenv()
+
 app = Flask(__name__)
 
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "chave-local-de-desenvolvimento")
 
-WHATSAPP_NUMERO = os.getenv("WHATSAPP_NUMERO", "5585999999999")
-INSTAGRAM_URL = os.getenv("INSTAGRAM_URL", "https://www.instagram.com/seuusuario")
+
+WHATSAPP_NUMERO = os.getenv("WHATSAPP_NUMERO", "5500000000000")
+INSTAGRAM_URL = os.getenv("INSTAGRAM_URL", "#")
+NOME_SITE = os.getenv("NOME_SITE", "Site Vitrine")
+
+
+@app.context_processor
+def variaveis_globais():
+    return {
+        "nome_site": NOME_SITE,
+        "instagram_url": INSTAGRAM_URL
+    }
 
 
 @app.route("/")
@@ -19,8 +33,7 @@ def index():
 
     return render_template(
         "index.html",
-        produtos_destaque=produtos_destaque,
-        instagram_url=INSTAGRAM_URL
+        produtos_destaque=produtos_destaque
     )
 
 
@@ -28,8 +41,7 @@ def index():
 def catalogo():
     return render_template(
         "catalogo.html",
-        produtos=produtos,
-        instagram_url=INSTAGRAM_URL
+        produtos=produtos
     )
 
 
@@ -40,28 +52,28 @@ def detalhe_produto(slug):
     if produto is None:
         abort(404)
 
-    mensagem = f"Oi! Tenho interesse no produto: {produto['nome']}. Poderia me passar mais informações?"
+    mensagem = (
+        f"Oi! Tenho interesse no produto: {produto['nome']}. "
+        "Poderia me passar mais informações?"
+    )
+
     link_whatsapp = f"https://wa.me/{WHATSAPP_NUMERO}?text={quote(mensagem)}"
 
     return render_template(
         "produto.html",
         produto=produto,
-        link_whatsapp=link_whatsapp,
-        instagram_url=INSTAGRAM_URL
+        link_whatsapp=link_whatsapp
     )
 
 
 @app.route("/sobre")
 def sobre():
-    return render_template(
-        "sobre.html",
-        instagram_url=INSTAGRAM_URL
-    )
+    return render_template("sobre.html")
 
 
 @app.errorhandler(404)
 def pagina_nao_encontrada(error):
-    return render_template("base.html", erro_404=True), 404
+    return render_template("404.html"), 404
 
 
 if __name__ == "__main__":

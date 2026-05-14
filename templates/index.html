@@ -1,59 +1,188 @@
 {% extends "base.html" %}
 
+{% block title %}{{ nome_site }}{% endblock %}
+
 {% block content %}
 
-<section class="hero">
-    <div class="hero-content">
-        <span class="tag">Artes autorais</span>
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-6">
+        <div class="hero-content">
+          <span class="news-sticker">NEWS NEWS NEWS</span>
 
-        <h1>Prints e camisetas com identidade própria.</h1>
+          <h1 class="hero-title">
+            agora você pode ter minhas colagens na sua casa!
+          </h1>
 
-        <p>
-            Uma vitrine para conhecer minhas artes, ver produtos disponíveis
-            e entrar em contato diretamente para comprar ou tirar dúvidas.
-        </p>
+          <p class="hero-description">
+            Prints físicos, colagens criativas e artes exclusivas com uma estética divertida,
+            colorida e cheia de personalidade.
+          </p>
 
-        <div class="hero-actions">
-            <a href="/catalogo" class="btn primary">Ver catálogo</a>
-            <a href="{{ instagram_url }}" target="_blank" class="btn secondary">Ver Instagram</a>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="/catalogo" class="btn btn-main">
+              Ver produtos
+            </a>
+
+            <a href="{{ instagram_url }}" target="_blank" class="btn btn-outline-custom">
+              Pedir arte exclusiva
+            </a>
+          </div>
         </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="hero-card">
+          <div class="basket-box">
+            <div class="fragile-label">
+              Frágil<br>
+              <small>handle with care</small>
+            </div>
+
+            <div class="paper-stack paper-1"></div>
+            <div class="paper-stack paper-2"></div>
+
+            <div class="main-paper">
+              <img
+                src="{{ url_for('static', filename='img/coracao-sorrindo.png') }}"
+                class="paper-heart-img"
+                alt="Coração sorrindo"
+              />
+
+              <p class="paper-small">prints físicos</p>
+              <p class="paper-price">A4 - R$20</p>
+              <p class="paper-price">A3 - R$35</p>
+
+              <p class="exclusive-text">
+                arte<br>
+                exclusiva?
+              </p>
+
+              <p class="paper-small mt-3">
+                me manda sua ideia no direct!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<section class="section">
-    <div class="section-header">
-        <h2>Produtos em destaque</h2>
-        <p>Algumas peças disponíveis no momento.</p>
+
+<section id="produtos" class="products-section">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="section-tag">vitrine</span>
+      <h2 class="section-title">produtos em destaque</h2>
+      <p class="section-subtitle">
+        escolha seu print favorito ou peça uma arte exclusiva
+      </p>
     </div>
 
-    <div class="grid">
-        {% for produto in produtos_destaque %}
-            <article class="card">
-                <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.nome }}">
+    <div class="row g-4 mt-4">
+      {% for produto in produtos_destaque %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card product-card h-100">
+          <div class="product-img-wrapper">
+            <img
+              src="{{ produto.imagem }}"
+              class="card-img-top product-img"
+              alt="{{ produto.nome }}"
+            />
+          </div>
 
-                <div class="card-body">
-                    <span class="category">{{ produto.categoria }}</span>
-                    <h3>{{ produto.nome }}</h3>
-                    <p>{{ produto.descricao }}</p>
+          <div class="card-body d-flex flex-column">
+            <h5 class="product-title">{{ produto.nome }}</h5>
 
-                    <div class="card-footer">
-                        <strong>{{ produto.preco }}</strong>
-                        <a href="/produto/{{ produto.slug }}" class="btn small">Ver detalhes</a>
-                    </div>
-                </div>
-            </article>
-        {% endfor %}
+            <p class="product-description">
+              {{ produto.descricao }}
+            </p>
+
+            <div class="mt-auto">
+              <p class="product-price">{{ produto.preco }}</p>
+
+              <a href="/produto/{{ produto.slug }}" class="btn btn-main w-100">
+                Quero esse
+                <img
+                  src="{{ url_for('static', filename='img/cartinha.png') }}"
+                  class="btn-icon"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
+
+    <div class="text-center mt-5">
+      <a href="/catalogo" class="btn btn-outline-custom">
+        Ver catálogo completo
+      </a>
+    </div>
+  </div>
 </section>
 
-<section class="section info-box">
-    <h2>Como funciona a compra?</h2>
 
-    <p>
-        O site é apenas uma vitrine. Ao se interessar por algum produto,
-        você clica no botão de contato e conversa comigo pelo WhatsApp ou Instagram.
-        Por lá combinamos disponibilidade, pagamento, envio e detalhes do pedido.
-    </p>
+<section id="sobre" class="about-section">
+  <div class="container">
+    <div class="about-box">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-lg-5">
+          <div class="about-highlight">
+            <img
+              src="{{ url_for('static', filename='img/coracao-sorrindo.jpg') }}"
+              class="about-heart-img"
+              alt="Coração sorrindo"
+            />
+
+            <h3>colagens feitas para deixar seu espaço mais divertido</h3>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7">
+          <h2 class="section-title text-start">sobre as artes</h2>
+
+          <p class="about-text">
+            Cada arte tem uma vibe própria: divertida, delicada, colorida e com aquele
+            jeitinho de colagem afetiva. Você pode escolher um print pronto ou pedir uma
+            arte exclusiva com uma ideia sua.
+          </p>
+
+          <p class="about-text mb-0">
+            Os prints físicos estão disponíveis em tamanho A4 e A3.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="contato" class="contact-section">
+  <div class="container">
+    <div class="contact-box text-center">
+      <span class="section-tag">contato</span>
+
+      <h2 class="section-title">arte exclusiva?</h2>
+
+      <p class="contact-text">
+        me manda sua ideia no direct e vamos criar algo especial.
+      </p>
+
+      <a href="{{ instagram_url }}" target="_blank" class="btn btn-main btn-lg mt-3">
+        Chamar no Instagram
+        <img
+          src="{{ url_for('static', filename='img/cartinha.png') }}"
+          class="btn-icon"
+          alt=""
+        />
+      </a>
+    </div>
+  </div>
 </section>
 
 {% endblock %}
